@@ -1,19 +1,48 @@
 // To click the buttons with the choice the user clicked
+let playerScore =0 ;
+let computerScore =0;
 let btns = document.querySelectorAll('button');
 const results = document.querySelector('#results');
-
+// to show visible score 
+let score = document.querySelector('#score');
 // use loop to go through each button 
 // focus on each  variables which scope will be in like choice
 btns.forEach(button => {
    button.addEventListener('click',function(e){
       const choice = e.currentTarget.dataset.choice;
       console.log(choice);
-      results.textContent = 'You picked: '+ choice ;
-});
+      const computer= getComputerChoice();
+      results.textContent = `You :${choice} | Computer : ${computer}`;
+     
 
 });
 
-
+});
+//  generating computer pick and display both when you click
+function getComputerChoice(){
+   const choices = ["rock", "paper","scissors"];
+   const idx = Math.floor(Math.random()*3);
+   return choices[idx];
+}
+// function to know who is the winner 
+function playRound(player,computer){
+    if ( player === computer){
+        return 'It is tie ';
+    }else if (
+        (player === "rock" && computer === 'sicssors')
+        || (player === 'sicssors' && computer === 'paper')
+        || (player === ' paper' && computer === 'rock')
+    ){
+         return 'player wins';
+    }else {
+        return 'computer wins';
+    }
+   
+}
+// function to see the score of the winner 
+function updateScoreBoard(playerScore, computerScore){
+ score.textContent = `player : ${playerScore} | computer : ${computerScore}`;
+}
 
 
 
